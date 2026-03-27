@@ -3,6 +3,8 @@ pandas
 numpy
 scikit-learn
 matplotlib
+plotly
 seaborn
 joblib
 requests
+streamlit-option-menu
