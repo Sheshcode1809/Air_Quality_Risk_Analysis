@@ -378,7 +378,7 @@ else:
     
     st.table(pd.DataFrame(aqi_data))
 
-    manual_text = """
+    st.markdown("""
         AQI PREDICTOR USER MANUAL
         
         HOW TO USE THIS WEBSITE:
@@ -393,14 +393,4 @@ else:
         - Outdoor athletes and event planners.
         - Environmental researchers and urban planners.
     """
-
-    # 2. ADD THE DOWNLOAD BUTTON
-    st.subheader("Need Help?")
-    st.download_button(
-        label="📥 Download User Manual (Text)",
-        data=manual_text,
-        file_name="AQI_Predictor_User_Manual.txt",
-        mime="text/plain",
-        help="Download instructions and target audience information."
     )
-    
