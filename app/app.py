@@ -65,14 +65,21 @@ h1, h2, h3 {
 </style>
 """, unsafe_allow_html=True)
 
+from pathlib import Path
+
 # ------------------ LOAD MODEL ------------------
 @st.cache_resource
 def load_model():
-    return joblib.load("../models/aqi_random_forest.pkl")
+    base_dir = Path(__file__).resolve().parent.parent
+    model_path = base_dir / "models" / "aqi_random_forest.pkl"
+    if not model_path.exists():
+        raise FileNotFoundError(f"Model file not found: {model_path}")
+    return joblib.load(model_path)
 
 try:
     model = load_model()
-except:
+except Exception as e:
+    st.error(f"Model load failed: {e}")
     model = None
 
 # ------------------ RISK GUIDANCE ------------------
@@ -106,8 +113,12 @@ with st.sidebar:
 @st.cache_data
 def load_data():
     try:
-        # Update this path to your actual CSV location
-        data = pd.read_csv("../data/processed/air_quality_with_risk.csv")
+        base_dir = Path(__file__).resolve().parent.parent
+        csv_path = base_dir / "data" / "processed" / "air_quality_with_risk.csv"
+        if not csv_path.exists():
+            raise FileNotFoundError(f"Data file not found: {csv_path}")
+
+        data = pd.read_csv(csv_path)
         data['Datetime'] = pd.to_datetime(
             data["Datetime"],
             format='mixed',
