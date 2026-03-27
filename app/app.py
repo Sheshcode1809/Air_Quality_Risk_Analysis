@@ -379,7 +379,8 @@ else:
     st.table(pd.DataFrame(aqi_data))
 
     st.markdown("""
-        AQI PREDICTOR USER MANUAL
+                
+        **AQI PREDICTOR USER MANUAL**
         
         HOW TO USE THIS WEBSITE:
         1. Navigate to the 'Predict AQI' tab.
